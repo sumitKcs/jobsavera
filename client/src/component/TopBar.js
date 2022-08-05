@@ -11,8 +11,8 @@ const TopBar = () => {
             className="topbar-poster-image"
             alt="..."
           />
-          <div className="topbar-trending-title">something</div>
-          <div className="topbar-trending-rank">Trending #1</div>
+          <div className="topbar-trending-title">Job सवेरा</div>
+          <div className="topbar-trending-rank">आपके जीवन में लाए सवेरा</div>
         </div>
       </div>
     </>

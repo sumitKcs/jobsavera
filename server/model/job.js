@@ -27,6 +27,11 @@ const jobSchema = mongoose.Schema({
     required: true,
     default: "Not Specified",
   },
+  qualification: {
+    type: String,
+    required: true,
+    default: "Not Specified",
+  },
   skills: {
     type: [String],
     required: true,
@@ -44,6 +49,11 @@ const jobSchema = mongoose.Schema({
     type: String,
     required: true,
     default: "jobsavera",
+  },
+  applyLink: {
+    type: String,
+    required: true,
+    default: "not specified",
   },
   postedOn: {
     type: Date,

@@ -1,9 +1,17 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import Navbar from "./Navbar";
+import { useNavigate, useParams } from "react-router-dom";
+import { ImLocation2 } from "react-icons/im";
+import { MdOutlineAccessTimeFilled } from "react-icons/md";
+import { HiCurrencyRupee } from "react-icons/hi";
+import { MdOutlineWork } from "react-icons/md";
+import { FaUserGraduate } from "react-icons/fa";
+import { AiOutlineBackward } from "react-icons/ai";
 
 const JobDetail = () => {
   const [singlejobDetails, setSingleJobDetails] = useState([]);
+  const navigate = useNavigate();
   const param = useParams();
   const { id } = param;
   const GET_JOB_BY_ID_URI = `${process.env.REACT_APP_SERVER_URI}/api/job/get/${id}`;
@@ -30,6 +38,7 @@ const JobDetail = () => {
     jobId,
     jobTitle,
     companyName,
+    qualification,
     experience,
     location,
     salary,
@@ -38,21 +47,88 @@ const JobDetail = () => {
     aboutCompany,
     postedOn,
     source,
+    applyLink,
   } = singlejobDetails;
+
+  const date = new Date(postedOn);
+  const day = date.getDate();
+  const month = date.getMonth();
+  const year = date.getFullYear();
+  const postedDate = `${day}/${month + 1}/${year}`;
   return (
     <>
-      <div>
-        <div>{jobTitle}</div>
-        <div>{companyName}</div>
-        <div>{jobId}</div>
-        <div>{location}</div>
-        <div>{experience}</div>
-        <div>{salary}</div>
-        <div>{skills}</div>
-        <div>{postedOn}</div>
-        <div>{description}</div>
-        <div>{aboutCompany}</div>
-        <div>{source}</div>
+      <Navbar />
+      <div className="jobDetail-container">
+        <div className="back-button-container">
+          <AiOutlineBackward
+            className="back-button"
+            onClick={() => navigate(-1)}
+          />
+        </div>
+        <div className="jobDetail-card">
+          <div className="jobDetail-content">
+            <div className="jobDetail-jobId ">Job Id: {jobId}</div>
+            <div className="jobDetail-jobTitle ">{jobTitle}</div>
+            <div className="jobDetail-companyName ">{companyName}</div>
+            <div className="jobDetails-icon-description-container">
+              <div className="jobDetails-icon-description-leftBox">
+                <div className="jobDetail-location jobContents">
+                  <ImLocation2 className="jobDetail-icons" /> &nbsp; {location}
+                </div>
+                <div className="jobDetail-qualification jobContents">
+                  <FaUserGraduate className="jobDetail-icons" />
+                  &nbsp; {qualification}
+                </div>
+                <div className="jobDetail-experience jobContents">
+                  <MdOutlineWork className="jobDetail-icons" />
+                  &nbsp; {experience}
+                </div>
+              </div>
+              <div className="jobDetails-icon-description-rightBox">
+                <div className="jobDetail-salary jobContents">
+                  <HiCurrencyRupee className="jobDetail-icons" />
+                  &nbsp; {salary}
+                </div>
+                <div className="jobDetail-postedOn jobContents">
+                  <MdOutlineAccessTimeFilled className="jobDetail-icons" />{" "}
+                  &nbsp; Posted on: {postedDate}
+                </div>
+              </div>
+            </div>
+            <div className="jobDetail-text-description-container">
+              <div className="jobDetail-heading ">Required Skills</div>
+              <hr className="horizontal-line"></hr>
+              <div className="jobDetail-skills text-description">{skills}</div>
+              <div className="jobDetail-heading ">Job Description</div>
+              <hr className="horizontal-line"></hr>
+              <div className="jobDetail-description text-description">
+                {description}
+              </div>
+              <div className="jobDetail-heading ">About Company</div>
+              <hr className="horizontal-line"></hr>
+              <div className="jobDetail-aboutCompany text-description">
+                {aboutCompany}
+              </div>
+              <div className="jobDetail-heading ">Source</div>
+              <hr className="horizontal-line"></hr>
+              <div className="jobDetail-source text-description">{source}</div>
+              <div className="jobDetail-applyLink-conatiner ">
+                <a
+                  className="jobDetail-applyButton-link"
+                  href={applyLink}
+                  target="_blank"
+                >
+                  <button
+                    className="jobDetail-applyButton btn btn-info"
+                    type="button"
+                  >
+                    Apply
+                  </button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

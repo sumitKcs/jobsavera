@@ -9,12 +9,13 @@ exports.add = async (req, res) => {
     companyName,
     location,
     salary,
+    qualification,
     experience,
     skills,
     description,
     aboutCompany,
     source,
-    postedOn,
+    applyLink,
   } = req.body;
 
   if (maxJobIdUser.length > 0) {
@@ -30,11 +31,13 @@ exports.add = async (req, res) => {
     companyName,
     location,
     salary,
+    qualification,
     experience,
     skills,
     description,
     aboutCompany,
     source,
+    applyLink,
   });
 
   await newJob.save();
@@ -48,25 +51,36 @@ exports.add = async (req, res) => {
       companyName: newJob.companyName,
       location: newJob.location,
       salary: newJob.salary,
+      qualification: newJob.qualification,
       experience: newJob.experience,
       skills: newJob.skills,
       description: newJob.description,
       aboutCompany: newJob.aboutCompany,
       source: newJob.source,
+      applyLink: newJob.applyLink,
       postedOn: newJob.postedOn,
     },
   });
 };
 
 exports.get = async (req, res) => {
-  const getAllJobs = await Job.find({});
+  const getAllJobs = await Job.find({}).sort({ jobId: -1 });
   console.log("all jobs", getAllJobs);
   res.json({ total: getAllJobs.length, jobs: getAllJobs });
 };
 
 exports.getById = async (req, res) => {
   const { id } = req.params;
+  if (isNaN(id)) {
+    return res.json({ Success: false, message: "Invalid Request" });
+  }
   const getJob = await Job.findOne({ jobId: id });
-  console.log(getJob);
-  res.json({ Success: true, message: "Job found sucessfully!!", job: getJob });
+  if (getJob) {
+    return res.json({
+      Success: true,
+      message: "Job found sucessfully!!",
+      job: getJob,
+    });
+  }
+  return res.json({ Success: false, message: "Job not found !!" });
 };

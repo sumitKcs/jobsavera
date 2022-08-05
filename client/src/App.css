@@ -53,7 +53,7 @@ a.navbar-brand {
   overflow: hidden;
 }
 .topbar-poster-image {
-  object-fit: fill;
+  object-fit: cover;
 }
 .trending-text {
   font-weight: 500;
@@ -70,9 +70,10 @@ a.navbar-brand {
 .topbar-trending-title {
   color: white;
   position: absolute;
-  font-size: large;
+  font-size: 3rem;
   font-weight: bold;
-  top: 12rem;
+  top: 13rem;
+  left: 60rem;
   width: 100%;
   margin-left: 1rem;
   z-index: 4;
@@ -81,7 +82,8 @@ a.navbar-brand {
 .topbar-trending-rank {
   color: yellow;
   position: absolute;
-  font-size: large;
+  font-size: 2rem;
+  left: 50rem;
   font-weight: bold;
   top: 10rem;
   width: 99%;
@@ -115,7 +117,7 @@ a.navbar-brand {
 .trending-text {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
-.movie-container {
+.job-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -124,14 +126,291 @@ a.navbar-brand {
   margin: 0px;
   padding: 0px;
 }
-.movie-card {
+.job-card {
+  align-self: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   margin: 1.5rem;
   padding: 1.5rem;
-  width: 55vh;
-  height: 30vh;
+  width: 60vh;
+  height: 35vh;
   cursor: pointer;
 }
-.movie-card:hover {
+.job-card:hover {
   
+}
+.job-image{
+  align-self:center ;
+ height: 10vh;
+ width: 10vw;
+}
+.job-summary{
+ margin-left: .6rem;
+ font-weight: bolder;
+ color: black;
+}
+.job-title{
+  font-size: large;
+  color: blue;
+}
+.company-name{
+  color: grey;
+}
+.footer-container {
+  height: 3rem;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.social_icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  font-size: x-large;
+  width: 15rem;
+  color: grey;
+  align-content: center;
+  align-items: center;
+
+}
+
+.instagram {
+  font-size: xx-large;
+  align-self: center;
+}
+
+.brand-name {
+  width: 13rem;
+}
+
+.copyright {
+  width: 8rem;
+
+}
+
+.brand-name,
+.copyright {
+  align-self: center;
+  font-size: larger;
+  font-weight: bolder;
+  color: grey;
+}
+.fav-no-data{
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  height: 50vh;
+  width: 50vw;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+}
+.no-fav-msg{
+  align-self: center;
+  margin-top: -3rem;
+  font-size: xx-large;
+  font-weight: bolder;
+  color: grey;
+}
+.jobDetail-container{
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+}
+.jobDetail-card{
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  height: fit-content;
+  width: 60vw;
+  
+}
+.jobDetail-content{
+  margin: 3rem;
+}
+.jobDetail-jobTitle{
+  font-size: 2rem;
+  font-weight: bolder;
+  color: blue;
+}
+.jobDetail-companyName{
+  font-size: 1.5rem;
+  font-weight: bolder;
+  color: grey;
+}
+.jobDetail-jobId{
+  font-weight: bold;
+  color: grey;
+}
+.jobDetails-icon-description-container{
+  line-height: 3;
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.jobDetail-icons{
+  color: green;
+  font-size: 1.5rem;
+}
+.jobContents{
+  align-self: center;
+  display: flex;
+  align-items: center;
+  
+}
+.jobDetail-heading{
+  font-size: x-large;
+  font-weight: bolder;
+}
+.horizontal-line{
+  border: 1px solid 	#D8D8D8;
+}
+
+.jobDetail-text-description-container{
+  margin-top: 2rem;
+  line-height: 2;
+}
+.text-description{
+  font-size: large;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.jobDetail-applyLink-conatiner{
+  display: flex;
+  justify-content: center;
+}
+.jobDetail-applyButton{
+  width: 15rem;
+}
+.jobDetail-applyButton-link{
+  color: white;
+  align-self: center;
+  font-size: larger;
+  font-weight: bolder;
+}
+.back-button-container {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  position: fixed;
+  left: 5rem;
+  top: 25rem;
+}
+
+.back-button {
+  font-size: 3rem;
+  cursor: pointer;
+
+}
+.back-button:hover {
+  color: grey;
+
+}
+.notice-board{
+  font-size: large;
+  letter-spacing: normal;
+  margin-top: 1rem;
+  padding: 1rem;
+  margin: auto;
+}
+
+/* media queries */
+@media only screen and (max-width: 1024px) {
+  .job-image{
+    display: none;
+  }
+  .searchBox {
+    width: 85vw;
+  }
+  .jobDetails-icon-description-container{
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1185px) {
+  .topbar-trending-title {
+    left: 39rem;
+  }
+  
+  .topbar-trending-rank {
+    left: 30rem;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .topbar-trending-title {
+    left: 29rem;
+  }
+  
+  .topbar-trending-rank {
+    left: 20rem;
+  }
+  .fav-no-data{
+    height: 50vh;
+    width: 70vw;
+  }
+  .jobDetails-icon-description-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 689px) {
+  .topbar-trending-title {
+    left: 14.8rem;
+    font-size: 1.5rem;
+  }
+  
+  .topbar-trending-rank {
+    left: 7.1rem;
+    font-size: 1.3rem;
+  }
+
+  .top-trending-image-conatiner {
+    background-color: white;
+    height: 30vh;
+    width: 100vw;
+    overflow: hidden;
+  }
+  .topbar-poster-image {
+    object-fit: cover;
+  }
+  .jobDetail-card{
+    width: 95vw;
+    
+  }
+  .back-button-container {
+    left: 0;
+    
+  }
+
+}
+@media only screen and (max-width: 300px) {
+  .topbar-trending-title {
+    left: 11rem;
+    font-size: 1rem;
+  }
+  
+  .topbar-trending-rank {
+    left: 5rem;
+    font-size: 1rem;
+  }
+
+  .top-trending-image-conatiner {
+    background-color: white;
+    height: 30vh;
+    width: 100vw;
+    overflow: hidden;
+  }
+  .topbar-poster-image {
+    object-fit: cover;
+  }
 }

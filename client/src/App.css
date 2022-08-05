@@ -1,0 +1,137 @@
+body {
+  overflow-x: hidden;
+  position: relative;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+.nav-bar-container {
+  position: fixed;
+  top: 0px;
+  z-index: 99;
+  height: fit-content;
+  width: 100vw;
+}
+.app-navbar {
+
+  position: relative;
+  z-index: 10;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  font-weight: bold;
+
+}
+a.navbar-brand {
+
+  color: grey;
+  font-size: x-Large;
+  letter-spacing: 3px;
+}
+
+.navbar-nav {
+
+  align-self: center;
+  margin: auto;
+  padding-right: 10rem;
+}
+
+.menu-link:hover {
+  font-size: large;
+}
+
+.top-trending {
+  overflow-x: hidden;
+  margin-top: 3.5rem;
+  padding: 0px;
+  width: 100%;
+}
+.top-trending-image-conatiner {
+  background-color: white;
+  height: 65vh;
+  width: 100vw;
+  overflow: hidden;
+}
+.topbar-poster-image {
+  object-fit: fill;
+}
+.trending-text {
+  font-weight: 500;
+  font-size: x-large;
+  text-align: center;
+  margin-top: 1.5rem;
+  padding: .5rem;
+  color: grey;
+  letter-spacing: .3rem;
+  z-index: 4;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
+}
+.topbar-trending-title {
+  color: white;
+  position: absolute;
+  font-size: large;
+  font-weight: bold;
+  top: 12rem;
+  width: 100%;
+  margin-left: 1rem;
+  z-index: 4;
+}
+
+.topbar-trending-rank {
+  color: yellow;
+  position: absolute;
+  font-size: large;
+  font-weight: bold;
+  top: 10rem;
+  width: 99%;
+  margin-left: 1rem;
+}
+
+.search-container {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: -webkit-sticky;
+  /* Safari */
+  position: sticky;
+  top: 0;
+  padding: 1rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+}
+.search-icon {
+  font-size: xx-large;
+  margin-right: 1rem;
+  height: fit-content;
+}
+.searchBox {
+  padding: 5px 10px;
+  border: inset;
+  width: 30vw;
+}
+.trending-text {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+.movie-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow-x: hidden;
+  margin: 0px;
+  padding: 0px;
+}
+.movie-card {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  margin: 1.5rem;
+  padding: 1.5rem;
+  width: 55vh;
+  height: 30vh;
+  cursor: pointer;
+}
+.movie-card:hover {
+  
+}

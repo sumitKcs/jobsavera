@@ -1,0 +1,11 @@
+.job-card:hover {
+    background-color: #E8E8E8;
+    background-position: left;
+    transition: background-position 0.5s ease-out;
+    .job-summary-column{
+        color: white
+    }
+    .job-title{
+        color: #fff44f
+    }
+  }

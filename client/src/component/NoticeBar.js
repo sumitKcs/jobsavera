@@ -31,7 +31,7 @@ const NoticeBar = () => {
                 } = item;
 
                 return (
-                  <a href={`/id/${jobId}`}>
+                  <a href={`/id/${jobId}`} key={index}>
                     <span>
                       ✅{jobTitle} @ {companyName} <ImLocation2 /> {location}
                     </span>

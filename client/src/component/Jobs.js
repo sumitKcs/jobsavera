@@ -9,8 +9,9 @@ import { MdOutlineAccessTimeFilled } from "react-icons/md";
 import { HiCurrencyRupee } from "react-icons/hi";
 import { MdOutlineWork } from "react-icons/md";
 import { FaUserGraduate } from "react-icons/fa";
-import jobImage from "../assests/topbar-image.jpg";
+import jobImage from "../assets/topbar-image.jpg";
 import NoticeBar from "./NoticeBar";
+import "../assets/Job.scss";
 
 const Jobs = () => {
   const { jobsData, dynamicText } = useGlobalContext();
@@ -28,7 +29,6 @@ const Jobs = () => {
   return (
     <>
       <div className="trending-text"> {dynamicText}</div>
-      <NoticeBar />
       <div className="job-container">
         {jobsData.length > 0 ? (
           jobsData.map((jobObj, index) => {
@@ -46,37 +46,45 @@ const Jobs = () => {
               >
                 {/* <FontAwesomeIcon  onClick={ favClickhandler} className= {favIconStyle} icon={solid('heart')}  /> */}
 
-                <div className="job-image">
+                {/* <div className="job-image-container">
                   <img
+                    className="job-image"
                     src={jobImage}
-                    style={{ height: "10vh", width: "8vw" }}
+                    style={{ height: "40%", width: "90%" }}
                     alt="job-image"
                   />
-                </div>
+                </div> */}
 
                 <div className="job-summary">
-                  <div>
-                    <div className="job-title"> {jobObj.jobTitle} </div>
-                    <div className="company-name"> @{jobObj.companyName} </div>
-                    <div className="salary">
-                      <HiCurrencyRupee style={{ color: "green" }} /> &nbsp;
-                      {jobObj.salary}
+                  <div className="job-title"> {jobObj.jobTitle} </div>
+                  <div className="company-name"> @{jobObj.companyName} </div>
+                  <div className="horizontal-line-container">
+                    <hr className="horizontal-line"></hr>{" "}
+                  </div>
+                  <div className="job-summary-column">
+                    <div className="job-summary-left">
+                      <div className="salary">
+                        <HiCurrencyRupee style={{ color: "green" }} /> &nbsp;
+                        {jobObj.salary}
+                      </div>
+                      <div className="experience">
+                        <FaUserGraduate style={{ color: "green" }} /> &nbsp;
+                        {jobObj.qualification}
+                      </div>
+                      <div className="experience">
+                        <MdOutlineWork style={{ color: "green" }} /> &nbsp;
+                        {jobObj.experience}
+                      </div>
                     </div>
-                    <div className="experience">
-                      <FaUserGraduate style={{ color: "green" }} /> &nbsp;
-                      {jobObj.qualification}
-                    </div>
-                    <div className="experience">
-                      <MdOutlineWork style={{ color: "green" }} /> &nbsp;
-                      {jobObj.experience}
-                    </div>
-                    <div className="location">
-                      <ImLocation2 style={{ color: "green" }} /> &nbsp;
-                      {jobObj.location}
-                    </div>
-                    <div className="posted-on">
-                      <MdOutlineAccessTimeFilled style={{ color: "green" }} />{" "}
-                      &nbsp; Posted on: {postedDate}
+                    <div className="job-summary-right">
+                      <div className="location">
+                        <ImLocation2 style={{ color: "green" }} /> &nbsp;
+                        {jobObj.city === "N/A" ? jobObj.state : jobObj.city}
+                      </div>
+                      <div className="posted-on">
+                        <MdOutlineAccessTimeFilled style={{ color: "green" }} />{" "}
+                        &nbsp; Posted on: {postedDate}
+                      </div>
                     </div>
                   </div>
                 </div>

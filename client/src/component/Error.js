@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../assests/Error.scss";
+import "../assets/Error.scss";
 const Error = () => {
   const navigate = useNavigate();
 

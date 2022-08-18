@@ -2,12 +2,13 @@ const Job = require("../model/job");
 
 exports.add = async (req, res) => {
   const maxJobIdUser = await Job.find().sort({ jobId: -1 }).limit(1);
-  console.log("max id: ", maxJobIdUser);
+  //console.log("max id: ", maxJobIdUser);
   let jobId;
   const {
     jobTitle,
     companyName,
-    location,
+    state,
+    city,
     salary,
     qualification,
     experience,
@@ -17,6 +18,16 @@ exports.add = async (req, res) => {
     source,
     applyLink,
   } = req.body;
+  if (
+    !jobTitle ||
+    !companyName ||
+    !state ||
+    !qualification ||
+    !description ||
+    !aboutCompany
+  ) {
+    return res.json({ Success: false, message: "Please check your inputs." });
+  }
 
   if (maxJobIdUser.length > 0) {
     const maxJobId = maxJobIdUser[0].jobId;
@@ -24,12 +35,13 @@ exports.add = async (req, res) => {
   } else {
     jobId = 1;
   }
-  console.log("max job id is:" + jobId);
+  // console.log("max job id is:" + jobId);
   const newJob = new Job({
     jobId,
     jobTitle,
     companyName,
-    location,
+    state,
+    city,
     salary,
     qualification,
     experience,
@@ -40,8 +52,8 @@ exports.add = async (req, res) => {
     applyLink,
   });
 
-  await newJob.save();
-
+  const resultSave = await newJob.save();
+  console.log("response after save", res);
   res.json({
     sucess: true,
     message: "Job Posted Sucessfully!",
@@ -65,7 +77,6 @@ exports.add = async (req, res) => {
 
 exports.get = async (req, res) => {
   const getAllJobs = await Job.find({}).sort({ jobId: -1 });
-  console.log("all jobs", getAllJobs);
   res.json({ total: getAllJobs.length, jobs: getAllJobs });
 };
 

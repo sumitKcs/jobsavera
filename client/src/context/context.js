@@ -27,7 +27,7 @@ const AppProvider = ({ children }) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ jobsData, dynamicText }}>
+    <AppContext.Provider value={{ jobsData, dynamicText, setDynamicText }}>
       {children}
     </AppContext.Provider>
   );

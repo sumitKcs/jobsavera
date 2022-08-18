@@ -1,0 +1,75 @@
+.form-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+}
+.form-card{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    height: fit-content;
+    width: 80vw;
+    padding: 4rem;
+    border-radius: 2rem;
+}
+.input-error-message{
+    color: red;
+}
+.add-job-textarea{
+    height: 30vh;
+}
+.job-description-editor{
+  
+  margin-bottom: 8rem;
+}
+
+
+.editor-class-job{
+    border: 2px solid grey;
+   
+   
+   
+}
+.wrapper-class-job{
+    
+    height: 50vh;
+}
+
+.about-company-editor{
+  margin-bottom: 10rem;
+  }
+  
+  
+  .editor-class-company{
+      border: 2px solid grey;
+      overflow-y: scroll;
+     
+     
+  }
+  .wrapper-class-company{
+     
+      height: 50vh;
+  }
+  .admin-label{
+    font-size: larger;
+    font-weight: bolder;
+  }
+  .fixedSalary{
+    margin-left: 2rem;
+  }
+  .fixedSalaryLabel{
+    margin-left: .2rem;
+  }
+  .SalaryType{
+    margin-top: .5rem;
+  }
+  .monthlySalary{
+    margin-left: 1rem;
+  }
+
+  /* //media queries */
+
+  @media only screen and (max-width: 1024px) {
+    .form-card{
+        width: 98vw;
+        padding: .5rem;
+    }
+  }

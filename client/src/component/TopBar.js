@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import image from "../assests/topbar-image.jpg";
+import image from "../assets/topbar-image_50.jpg";
 const TopBar = () => {
   return (
     <>

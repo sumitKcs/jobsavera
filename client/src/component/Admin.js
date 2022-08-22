@@ -16,6 +16,8 @@ const Admin = () => {
   const [cityVal, setCityVal] = useState("");
   const [fixedSalary, setFixedSalary] = useState(false);
   const [isPublished, setIsPublished] = useState(false);
+  const [workExperience, setWorkExperience] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -98,14 +100,21 @@ const Admin = () => {
   };
   const UGC = CoursesList.filter((item, index) => {
     if (item.Course.charAt(0) === "B" || item.Course.charAt(0) === "b") {
-      return item.Course;
+      return item;
     }
   });
   const PGC = CoursesList.filter((item, index) => {
     if (item.Course.charAt(0) === "M" || item.Course.charAt(0) === "m") {
-      return item.Course;
+      return item;
     }
   });
+  // const stateName="Bihar"
+  // const areaList = AreaList.filter((item, index) => {
+  //   if (item.Course.charAt(0) === "M" || item.Course.charAt(0) === "m") {
+  //     return item.Course;
+  //   }
+  // });
+
   console.log("UGC", UGC);
   console.log("PGC", PGC);
   return (
@@ -275,21 +284,17 @@ const Admin = () => {
               <div className="SalaryType">
                 <input
                   type="radio"
-                  id="html"
-                  name="annuallySalary"
+                  name="SalaryType"
                   value="annually"
                   className="annuallySalary"
-                  checked={true}
-                  {...register("annuallySalary", { required: true })}
+                  defaultChecked
                 />{" "}
                 <label for="html">annually</label>
                 <input
                   type="radio"
-                  id="html"
-                  name="monthlySalary"
+                  name="SalaryType"
                   value="monthly"
                   className="monthlySalary"
-                  {...register("monthlySalary", { required: true })}
                 />{" "}
                 <label for="html">monthly</label>
               </div>
@@ -326,7 +331,7 @@ const Admin = () => {
                 htmlFor="exampleFormControlInput1 admin-label"
                 className="admin-label"
               >
-                Experience
+                Work Experience
               </label>
               <br />
               {errors.experience && (
@@ -334,14 +339,46 @@ const Admin = () => {
                   Please Enter Experience
                 </span>
               )}
-              <input
-                name="experience"
-                type="text"
-                className="form-control"
-                id="exampleFormControlInput1"
-                placeholder="0-1 years"
-                {...register("experience", { required: true })}
-              />
+              <div className="workExperience">
+                <input
+                  type="radio"
+                  name="workExperience"
+                  value="fresher"
+                  className="fresher"
+                  defaultChecked
+                  onChange={() => setWorkExperience(!workExperience)}
+                />{" "}
+                <label for="html">fresher</label>
+                <input
+                  type="radio"
+                  name="workExperience"
+                  value="experienced"
+                  className="experienced"
+                  onChange={() => setWorkExperience(!workExperience)}
+                />{" "}
+                <label for="html">experienced</label>
+              </div>
+
+              {workExperience && (
+                <>
+                  <input
+                    name="minExperience"
+                    type="text"
+                    className="form-control"
+                    id="exampleFormControlInput1"
+                    placeholder="min experience in years"
+                    {...register("minExperience", { required: true })}
+                  />
+                  <input
+                    name="maxExperience"
+                    type="text"
+                    className="form-control"
+                    id="exampleFormControlInput1"
+                    placeholder="max experience in years"
+                    {...register("maxExperience", { required: true })}
+                  />
+                </>
+              )}
             </div>
             <div className="form-group">
               <label htmlFor="exampleFormControlInput1" className="admin-label">
@@ -367,9 +404,9 @@ const Admin = () => {
               <div className="job-description-editor">
                 <Editor
                   editorState={jobDescriptionState}
-                  wrapperClassName="wrapper-className-job"
-                  editorClassName="editor-className-job"
-                  toolbarClassName="toolbar-className-job"
+                  wrapperClassName="wrapper-class-job"
+                  editorClassName="editor-class-job"
+                  toolbarClassName="toolbar-class-job"
                   onEditorStateChange={jobDescriptionHandler}
                   placeholder="Write about Job here......"
                   required={true}
@@ -392,9 +429,9 @@ const Admin = () => {
               <div className="about-company-editor">
                 <Editor
                   editorState={aboutCompanyState}
-                  wrapperClassName="wrapper-className-company"
-                  editorClassName="editor-className-company"
-                  toolbarClassName="toolbar-className-company"
+                  wrapperClassName="wrapper-class-company"
+                  editorClassName="editor-class-company"
+                  toolbarClassName="toolbar-class-company"
                   onEditorStateChange={aboutCompanyHandler}
                   placeholder="Write about company here......"
                   required={true}

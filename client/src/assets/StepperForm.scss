@@ -1,0 +1,114 @@
+
+
+.stepperForm{
+    height: auto;
+    width: 100vw;
+    margin-bottom: 5rem;
+    display: flex;
+    justify-content: center;
+
+    --stepper-content-margin : 2rem 2rem 2rem 2rem;
+    --column-width : 25vw;
+    --form-height: 20rem;
+    --double-text-input-width: 14rem;
+}
+.stepperform-container{
+    height: auto;
+    width: 70vw;
+    margin-top: 5rem;
+    border-radius: 2rem;
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+
+}
+.stepper{
+    margin: 0rem 2rem;
+    height: 7rem;
+}
+.step-container{
+ 
+}
+.stepper-form-content-container{
+    margin:var(--stepper-content-margin);
+    height: auto;
+}
+.stepper-form-content{
+    height: var(--form-height);
+    margin:var(--stepper-content-margin);
+}
+.stepper-form-buttons-container{
+    margin:var(--stepper-content-margin);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    
+}
+
+.form-content-columns{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.form-content-col1{
+    width: var(--column-width);
+}
+.form-content-col2{
+    width: var(--column-width);
+}
+.single-column-container{
+    height: 4rem;
+    width: var(--column-width);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.single-input-container{
+    width: var(--column-width);
+}
+.multiple-input-container{
+    width: var(--column-width);
+    display: flex;
+    justify-content: space-around;
+}
+.select-input{
+    width: 11vw;
+}
+.checkbox-input-container{
+    display: inline-block;
+    border: 2px solid green;
+    width: var(--column-width);
+}
+
+.single-input-container .wfh {
+    margin-left: .2rem ;
+    color: grey;
+    font-weight: lighter;
+}
+.multiple-input-container .number-input, .multiple-input-container .max-salary, .multiple-input-container .min-salary{
+    width: var(--double-text-input-width)
+
+}
+.salary-label{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    margin: .2rem
+}
+.salary-label .fixed-salary{
+    margin-left: 1.5rem;
+    color: grey
+}
+.with-label{
+    margin-top: -1rem;
+}
+
+
+
+
+    // media queries
+    @media only screen and (max-width: 500px) {
+     
+    }
+
+

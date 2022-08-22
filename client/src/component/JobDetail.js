@@ -71,9 +71,11 @@ const JobDetail = () => {
   return (
     <>
       <Navbar />
-      <TopBar />
-      <NoticeBar />
-      <Search />
+      <div className="jobDetail-noticebar">
+        {" "}
+        <NoticeBar />
+      </div>
+
       <DynamicText text="Job Description" />
       <div className="jobDetail-container">
         {errorResponse ? (

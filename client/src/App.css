@@ -1,18 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 
+html {
+  overflow-x: hidden;
+}
 body {
   overflow-x: hidden;
   position: relative;
   /* font-family: "Nunito", sans-serif;
   font-family: 'Roboto', sans-serif; */
   font-family: 'Roboto Slab', serif;
-
+  
 
 }
-  html {
-  overflow-x: hidden;
-}
+
 
 .nav-bar-container {
   position: fixed;
@@ -21,7 +22,6 @@ body {
   height: fit-content;
   width: 100vw;
   font-weight: bolder;
-  background-color: red;
 }
 .app-navbar {
 
@@ -264,8 +264,11 @@ a.navbar-brand {
   font-weight: bolder;
   color: grey;
 }
+.jobDetail-noticebar{
+  margin-top: 3rem;
+}
 .jobDetail-container{
-  margin-top: 4rem;
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
 }

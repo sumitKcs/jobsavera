@@ -47,6 +47,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+ 
 }
 .form-content-col1{
     width: var(--column-width);
@@ -68,21 +69,34 @@
 .multiple-input-container{
     width: var(--column-width);
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 .select-input{
     width: 11vw;
 }
 .checkbox-input-container{
-    display: inline-block;
-    border: 2px solid green;
     width: var(--column-width);
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    height: 2.5rem;
+    margin-top: .5rem;
 }
-
+.checkbox-label{
+    margin-left: .5rem;
+}
+.checkbox-container{
+    margin-left: .7rem;
+    color: grey;
+    font-size: 14px;
+    align-self: center;
+}
 .single-input-container .wfh {
+    border: 2px solid purple;
     margin-left: .2rem ;
     color: grey;
     font-weight: lighter;
+    width: var(--column-width);
 }
 .multiple-input-container .number-input, .multiple-input-container .max-salary, .multiple-input-container .min-salary{
     width: var(--double-text-input-width)
@@ -103,12 +117,149 @@
     margin-top: -1rem;
 }
 
-
+.multiple-input-container .salary-period{
+    font-size: 1px;
+}
 
 
     // media queries
-    @media only screen and (max-width: 500px) {
-     
-    }
+    @media only screen and (max-width: 864px) {
 
+       
+        
+        .stepper-form-content{
+            height: auto;
+            margin:var(--stepper-content-margin);
+            display: flex;
+            justify-content: center;
+
+            --column-width : 40vw;
+        }
+        .form-content-columns{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: auto;
+            width: 50vw;
+        }
+        .single-input-container{
+            align-self: center;
+            width: var(--column-width);
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        .experience{
+            justify-content: left;
+        }
+        
+    }
+    @media only screen and (max-width: 657px) {
+        
+
+        .stepperForm{
+            margin: 0;
+        }
+        .stepperform-container{
+            width: 100vw;
+            margin: 5rem 0 0 0;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 0px 0px;
+        
+        }
+        .stepper{
+            margin: 0;
+        }
+        .stepper-form-content-container{
+            margin:0;
+            width: 100vw;
+        }
+        .stepper-form-content{
+            height: auto;
+            margin:0;
+        }
+        .form-content-columns{
+            // display: flex;
+            // flex-direction: row;
+            // justify-content: space-around;
+            width: 80vw;
+         
+        }
+        .form-content-col1{
+            width: 80vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .form-content-col2{
+            width: 80vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .single-column-container{
+            height: 4rem;
+            width: 80vw;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        .single-input-container{
+            width: 80vw;
+        }
+        .multiple-input-container{
+            width: 80vw;
+        }
+        .select-input{
+            width: 35vw;
+        }
+        .checkbox-input-container{
+            width:80vw;
+            justify-content:left;
+        }
+        .chceckbox-label{
+            margin-left: .5rem;
+        }
+        .checkbox-container{
+            margin-left: 1rem;
+            color: grey;
+        }
+        .multiple-input-container{
+            width: 78vw;
+            display: flex;
+            justify-content:left;
+            margin: 0;
+        }
+        .job-location{
+            align-self: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0;
+            width: 80vw;
+      }
+    }
+    @media only screen and (max-width: 333px) {
+        .job-location{
+            align-self: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin: 0;
+            width: 80vw;
+      }
+      .wfh{
+        font-size: small;
+        color: grey;
+        align-self: flex-start;
+
+      }
+      .job-location-label{
+        align-self: flex-start;
+      }
+    }
 

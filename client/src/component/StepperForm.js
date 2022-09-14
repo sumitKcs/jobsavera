@@ -31,16 +31,16 @@ import { CoursesList } from "../helper/CoursesList";
 const getSteps = () => {
   return ["Basic Details", "Additional Details", "About company"];
 };
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
+// const ITEM_HEIGHT = 48;
+// const ITEM_PADDING_TOP = 8;
+// const MenuProps = {
+//   PaperProps: {
+//     style: {
+//       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+//       width: 250,
+//     },
+//   },
+// };
 
 const StepperForm = () => {
   const theme = useTheme();
@@ -153,17 +153,21 @@ const StepperForm = () => {
                   />
                 </div>
               </div>
-              <span className="input-label salary-label">
-                <FormLabel id="work-experience">Salary in ₹</FormLabel>
-                <FormControlLabel
-                  className="fixed-salary"
-                  control={<Checkbox defaultChecked />}
-                  label="Fixed Salary"
-                  checked={fixedSalary}
-                  onChange={() => setFixedSalary(!fixedSalary)}
-                  inputProps={{ "aria-label": "controlled" }}
-                />
-              </span>
+              <div className="checkbox-input-container">
+                <span className="label-text">Salary in ₹: </span>
+                <span className="checkbox-container">
+                  <input
+                    className="checkBox"
+                    name="salary"
+                    type="checkbox"
+                    value={fixedSalary}
+                    onChange={() => setFixedSalary(!fixedSalary)}
+                  />
+                  <label htmlFor="salary" className="checkbox-label">
+                    Fixed Salary
+                  </label>
+                </span>
+              </div>
 
               <div className="single-column-container with-label">
                 <span className="multiple-input-container">
@@ -209,7 +213,7 @@ const StepperForm = () => {
                 </span>
               </div>
               <div className="single-column-container">
-                <span className="multiple-input-container">
+                <span className="multiple-input-container salary-period">
                   <FormControl>
                     <RadioGroup
                       row
@@ -235,16 +239,19 @@ const StepperForm = () => {
               </div>
             </div>
             <div className="form-content-col2">
-              <div className="single-column-container">
-                <span className="single-input-container">
-                  <FormControlLabel
-                    className="wfh"
-                    control={<Checkbox defaultChecked />}
-                    label="Work from home"
-                    checked={permanentWFH}
+              <div className="checkbox-input-container">
+                <span className="label-text">Location: </span>
+                <span className="checkbox-container">
+                  <input
+                    className="checkbox"
+                    name="wfh"
+                    type="checkbox"
+                    value={permanentWFH}
                     onChange={() => setPermanentWFH(!permanentWFH)}
-                    inputProps={{ "aria-label": "controlled" }}
                   />
+                  <label htmlFor="wfh" className="checkbox-label">
+                    Work from home
+                  </label>
                 </span>
               </div>
               {!permanentWFH && (
@@ -389,7 +396,7 @@ const StepperForm = () => {
             <div className="form-content-col1">
               <div>
                 <div className="single-column-container">
-                  <div className="single-input-container">
+                  <div className="single-input-container experience">
                     <FormControl>
                       <FormLabel id="work-experience">
                         Work Experinece

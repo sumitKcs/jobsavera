@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { Editor } from "react-draft-wysiwyg";
+import { EditorState, convertToRaw } from "draft-js";
+import draftToHtml from "draftjs-to-html";
 import {
   Stepper,
   Step,
@@ -21,6 +24,7 @@ import {
   Radio,
   FormLabel,
   RadioGroup,
+  TextareaAutosize,
 } from "@material-ui/core";
 import "../assets/StepperForm.scss";
 import Navbar from "./Navbar";
@@ -29,7 +33,12 @@ import { SkillsList } from "../helper/SkillsList";
 import { CoursesList } from "../helper/CoursesList";
 
 const getSteps = () => {
-  return ["Basic Details", "Additional Details", "About company"];
+  return [
+    "Basic Details",
+    "Additional Details",
+    "About company",
+    "Source & Link",
+  ];
 };
 // const ITEM_HEIGHT = 48;
 // const ITEM_PADDING_TOP = 8;
@@ -54,6 +63,14 @@ const StepperForm = () => {
   const [fixedSalary, setFixedSalary] = useState(false);
   const [salaryPeriod, setSalaryPeriod] = useState("annually");
   const [experienceVal, setExperienceVal] = useState("");
+  const [jobDescriptionVal, setJobDescriptionVal] = useState("");
+  const [aboutCompanyVal, setAboutCompanyVal] = useState("");
+  const [jobDescriptionState, setJobDescriptionState] = useState(
+    EditorState.createEmpty()
+  );
+  const [aboutCompanyState, setAboutCompanyState] = useState(
+    EditorState.createEmpty()
+  );
 
   let UGC = CoursesList.filter((item, index) => {
     if (item.Course.charAt(0) === "B" || item.Course.charAt(0) === "b") {
@@ -105,6 +122,27 @@ const StepperForm = () => {
 
   const handleExperience = (e) => {
     setExperienceVal(e.target.value);
+  };
+  const jobDescriptionHandler = (jobDescriptionState) => {
+    setJobDescriptionState(jobDescriptionState);
+    const val = draftToHtml(
+      convertToRaw(jobDescriptionState.getCurrentContent())
+    );
+    setJobDescriptionVal(val);
+    // console.log(
+    //   draftToHtml(convertToRaw(jobDescriptionState.getCurrentContent()))
+    // );
+  };
+
+  const aboutCompanyHandler = (aboutCompanyState) => {
+    setAboutCompanyState(aboutCompanyState);
+    const val = draftToHtml(
+      convertToRaw(aboutCompanyState.getCurrentContent())
+    );
+    setAboutCompanyVal(val);
+    // console.log(
+    //   draftToHtml(convertToRaw(aboutCompanyState.getCurrentContent()))
+    // );
   };
 
   const steps = getSteps();
@@ -392,124 +430,188 @@ const StepperForm = () => {
 
       case 1:
         return (
-          <div className="form-content-columns">
-            <div className="form-content-col1">
-              <div>
-                <div className="single-column-container">
-                  <div className="single-input-container experience">
-                    <FormControl>
-                      <FormLabel id="work-experience">
-                        Work Experinece
-                      </FormLabel>
-                      <RadioGroup
-                        row
-                        aria-labelledby="work-experience"
-                        name="work-experience"
-                        value={experienceVal}
-                        onChange={handleExperience}
-                      >
-                        <FormControlLabel
-                          value="fresher"
-                          control={<Radio />}
-                          label="Fresher"
-                        />
-                        <FormControlLabel
-                          value="experienced"
-                          control={<Radio />}
-                          label="Experienced"
-                        />
-                      </RadioGroup>
-                    </FormControl>
+          <div className="form-content-columns-container">
+            <div className="form-content-columns">
+              <div className="form-content-col1">
+                <div>
+                  <div className="single-column-container">
+                    <div className="single-input-container experience">
+                      <FormControl>
+                        <FormLabel id="work-experience">
+                          Work Experinece
+                        </FormLabel>
+                        <RadioGroup
+                          row
+                          aria-labelledby="work-experience"
+                          name="work-experience"
+                          value={experienceVal}
+                          onChange={handleExperience}
+                        >
+                          <FormControlLabel
+                            value="fresher"
+                            control={<Radio />}
+                            label="Fresher"
+                          />
+                          <FormControlLabel
+                            value="experienced"
+                            control={<Radio />}
+                            label="Experienced"
+                          />
+                        </RadioGroup>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="single-column-container">
+                    <span className="multiple-input-container">
+                      {experienceVal === "experienced" && (
+                        <>
+                          <TextField
+                            className="min-experience number-input"
+                            id="min-experience"
+                            label="Min. exp. in yrs"
+                            variant="outlined"
+                            size="small"
+                            fullWidth
+                            placeholder="ex: 500000"
+                            name="min-experience"
+                            type="number"
+                            InputProps={{
+                              inputProps: {
+                                max: 20,
+                                min: 0,
+                              },
+                            }}
+                            required
+                          />
+                          <TextField
+                            className="max-experience number-input"
+                            id="max-experience"
+                            label="Max. exp. in yrs"
+                            variant="outlined"
+                            size="small"
+                            fullWidth
+                            placeholder="ex: 700000"
+                            name="max-experience"
+                            type="number"
+                            InputProps={{
+                              inputProps: {
+                                max: 20,
+                                min: 0,
+                              },
+                            }}
+                            required
+                          />
+                        </>
+                      )}
+                    </span>
                   </div>
                 </div>
+              </div>
+              <div className="form-content-col2">
                 <div className="single-column-container">
-                  <span className="multiple-input-container">
-                    {experienceVal === "experienced" && (
-                      <>
-                        <TextField
-                          className="min-experience number-input"
-                          id="min-experience"
-                          label="Min. exp. in yrs"
-                          variant="outlined"
-                          size="small"
-                          fullWidth
-                          placeholder="ex: 500000"
-                          name="min-experience"
-                          type="number"
-                          InputProps={{
-                            inputProps: {
-                              max: 20,
-                              min: 0,
-                            },
-                          }}
-                          required
-                        />
-                        <TextField
-                          className="max-experience number-input"
-                          id="max-experience"
-                          label="Max. exp. in yrs"
-                          variant="outlined"
-                          size="small"
-                          fullWidth
-                          placeholder="ex: 700000"
-                          name="max-experience"
-                          type="number"
-                          InputProps={{
-                            inputProps: {
-                              max: 20,
-                              min: 0,
-                            },
-                          }}
-                          required
-                        />
-                      </>
-                    )}
-                  </span>
+                  <div className="multiple-input-container">
+                    <TextField
+                      className="max-experience text-input"
+                      id="required-skills"
+                      label="required skills"
+                      variant="outlined"
+                      size="small"
+                      fullWidth
+                      placeholder="ex: ms-word, telecalling, software developer"
+                      name="max-experience"
+                      required
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="form-content-col2">
-              <div className="single-column-container">
-                <div className="multiple-input-container">
-                  <TextField
-                    className="max-experience text-input"
-                    id="required-skills"
-                    label="required skills"
-                    variant="outlined"
-                    size="small"
-                    fullWidth
-                    placeholder="ex: ms-word, telecalling, software developer"
-                    name="max-experience"
-                    required
-                  />
-                </div>
+            <div className="full-width-column job-description">
+              <FormLabel id="work-experience">Job Description</FormLabel>
+              <div className="job-description-editor">
+                <Editor
+                  editorState={jobDescriptionState}
+                  wrapperClassName="wrapper-class-job"
+                  editorClassName="editor-class-job"
+                  toolbarClassName="toolbar-class-job"
+                  onEditorStateChange={jobDescriptionHandler}
+                  placeholder="Write about Job here......"
+                  required={true}
+                  toolbar={{
+                    options: ["inline", "list", "textAlign", "history", "link"],
+                    inline: { inDropdown: true },
+                    list: { inDropdown: true },
+                    textAlign: { inDropdown: true },
+                    link: { inDropdown: true },
+                    history: { inDropdown: true },
+                  }}
+                />
               </div>
             </div>
           </div>
         );
       case 2:
         return (
-          <TextField
-            id="jobTitle"
-            label="company name"
-            variant="outlined"
-            placeholder="company name"
-            fullWidth
-            margin="normal"
-            name="jobTitle"
-          />
+          <div className="form-content-columns-container">
+            <div className="about-company-container">
+              <TextField
+                className="company-name"
+                id="company-name"
+                label="company name"
+                variant="outlined"
+                placeholder="company name"
+                margin="normal"
+                name="jobTitle"
+              />
+              <div className="full-width-column">
+                <FormLabel id="about-company">About Company</FormLabel>
+                <div className="about-company-editor">
+                  <Editor
+                    id="about-company"
+                    editorState={aboutCompanyState}
+                    wrapperClassName="wrapper-class-job"
+                    editorClassName="editor-class-job"
+                    toolbarClassName="toolbar-class-job"
+                    onEditorStateChange={aboutCompanyHandler}
+                    placeholder="Write about company here......"
+                    required={true}
+                    toolbar={{
+                      options: [
+                        "inline",
+                        "list",
+                        "textAlign",
+                        "history",
+                        "link",
+                      ],
+                      inline: { inDropdown: true },
+                      list: { inDropdown: true },
+                      textAlign: { inDropdown: true },
+                      link: { inDropdown: true },
+                      history: { inDropdown: true },
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         );
       case 3:
         return (
-          <TextField
-            id="jobTitle"
-            label="job description"
-            variant="outlined"
-            placeholder="job description"
-            fullWidth
-            margin="normal"
-            name="jobTitle"
-          />
+          <>
+            <TextField
+              label="Source"
+              variant="outlined"
+              placeholder="ex: careers.amazon.in"
+              fullWidth
+              margin="normal"
+            />
+            <TextField
+              label="Apply Link"
+              variant="outlined"
+              placeholder="ex: https://careers.amazon.in/software-developer"
+              fullWidth
+              margin="normal"
+            />
+          </>
         );
       default:
         return;

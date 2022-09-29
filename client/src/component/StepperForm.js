@@ -169,6 +169,7 @@ const StepperForm = () => {
       let qualification;
       if (qualificationVal === "batchelors" || qualificationVal === "masters") {
         qualification = courseVal;
+        qualification = qualification.toString();
       }
       if (permanentWFH) {
         jobLocation = "WFH";
@@ -178,12 +179,12 @@ const StepperForm = () => {
       if (fixedSalary) {
         salary = fixedSalaryAmount;
       } else {
-        salary = { min: MinimumSalaryAmount, max: maximumSalaryAmount };
+        salary = MinimumSalaryAmount + "-" + maximumSalaryAmount;
       }
       if (experienceVal === "fresher") {
         experience = "fresher";
       } else {
-        experience = { min: minimumExperience, max: maximumExperience };
+        experience = minimumExperience + "-" + maximumExperience;
       }
       const formData = {
         jobTitle,

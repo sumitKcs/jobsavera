@@ -9,40 +9,39 @@ const jobSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  companyName: {
-    type: String,
+  noOfOpenings: {
+    type: Number,
     required: true,
   },
-  state: {
+  jobLocation: {
     type: String,
     required: true,
-  },
-  city: {
-    type: String,
-    required: true,
-    default: "N/A",
   },
   salary: {
     type: String,
     required: true,
-    default: "Not Specified",
   },
-  experience: {
+  salaryPeriod: {
     type: String,
     required: true,
-    default: "Not Specified",
   },
   qualification: {
     type: String,
     required: true,
-    default: "Not Specified",
   },
-  skills: {
-    type: [String],
+  jobDescription: {
+    type: String,
     required: true,
-    default: "not mentioned",
   },
-  description: {
+  experience: {
+    type: String,
+    required: true,
+  },
+  requiredSkills: {
+    type: String,
+    required: true,
+  },
+  companyName: {
     type: String,
     required: true,
   },
@@ -53,12 +52,10 @@ const jobSchema = mongoose.Schema({
   source: {
     type: String,
     required: true,
-    default: "jobsavera",
   },
   applyLink: {
     type: String,
     required: true,
-    default: "not specified",
   },
   postedOn: {
     type: Date,

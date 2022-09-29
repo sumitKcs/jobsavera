@@ -6,14 +6,15 @@ exports.add = async (req, res) => {
   let jobId;
   const {
     jobTitle,
-    companyName,
-    state,
-    city,
-    salary,
+    noOfOpenings,
+    jobLocation,
     qualification,
+    salary,
+    salaryPeriod,
+    jobDescription,
     experience,
-    skills,
-    description,
+    requiredSkills,
+    companyName,
     aboutCompany,
     source,
     applyLink,
@@ -21,9 +22,9 @@ exports.add = async (req, res) => {
   if (
     !jobTitle ||
     !companyName ||
-    !state ||
+    !jobLocation ||
     !qualification ||
-    !description ||
+    !jobDescription ||
     !aboutCompany
   ) {
     return res.json({ Success: false, message: "Please check your inputs." });
@@ -39,14 +40,15 @@ exports.add = async (req, res) => {
   const newJob = new Job({
     jobId,
     jobTitle,
-    companyName,
-    state,
-    city,
-    salary,
+    noOfOpenings,
+    jobLocation,
     qualification,
+    salary,
+    salaryPeriod,
+    jobDescription,
     experience,
-    skills,
-    description,
+    requiredSkills,
+    companyName,
     aboutCompany,
     source,
     applyLink,
@@ -58,15 +60,16 @@ exports.add = async (req, res) => {
     sucess: true,
     message: "Job Posted Sucessfully!",
     job: {
-      jobId: newJob.jobId,
       jobTitle: newJob.jobTitle,
-      companyName: newJob.companyName,
-      location: newJob.location,
-      salary: newJob.salary,
+      noOfOpenings: newJob.noOfOpenings,
+      jobLocation: newJob.jobLocation,
       qualification: newJob.qualification,
+      salary: newJob.salary,
+      salaryPeriod: newJob.salaryPeriod,
+      jobDescription: newJob.jobDescription,
       experience: newJob.experience,
-      skills: newJob.skills,
-      description: newJob.description,
+      requiredSkills: newJob.requiredSkills,
+      companyName: newJob.companyName,
       aboutCompany: newJob.aboutCompany,
       source: newJob.source,
       applyLink: newJob.applyLink,

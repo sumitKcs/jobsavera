@@ -31,6 +31,7 @@ import Navbar from "./Navbar";
 import stateCityJson from "../helper/stateCityList";
 import { SkillsList } from "../helper/SkillsList";
 import { CoursesList } from "../helper/CoursesList";
+import axios from "axios";
 
 const getSteps = () => {
   return [
@@ -55,22 +56,36 @@ const StepperForm = () => {
   const theme = useTheme();
   const { innerHeight, innerWidth } = window;
   const [activeStep, setActiveStep] = useState(0);
-  const [stateVal, setStateVal] = useState("");
-  const [cityVal, setCityVal] = useState("");
-  const [qualificationVal, setQualificationVal] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
+  const [noOfOpenings, setNoOfOpenings] = useState("");
+  const [state, setstate] = useState("");
+  const [city, setcity] = useState("");
+  const [qualificationVal, setqualificationVal] = useState("");
   const [courseVal, setCourseVal] = useState([]);
   const [permanentWFH, setPermanentWFH] = useState(false);
   const [fixedSalary, setFixedSalary] = useState(false);
+  const [fixedSalaryAmount, setFixedSalaryAmount] = useState(0);
+  const [maximumSalaryAmount, setMaximumSalaryAmount] = useState(0);
+  const [MinimumSalaryAmount, setMinimumSalaryAmount] = useState(0);
   const [salaryPeriod, setSalaryPeriod] = useState("annually");
   const [experienceVal, setExperienceVal] = useState("");
-  const [jobDescriptionVal, setJobDescriptionVal] = useState("");
-  const [aboutCompanyVal, setAboutCompanyVal] = useState("");
+  const [maximumExperience, setMaximumExperience] = useState(0);
+  const [minimumExperience, setMinimumExperience] = useState(0);
+  const [requiredSkills, setRequiredSkills] = useState("");
+  const [jobDescription, setjobDescription] = useState("");
+  const [aboutCompany, setaboutCompany] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [source, setSource] = useState("");
+  const [applyLink, setApplyLink] = useState("");
+  const [isPublished, setIsPublished] = useState(false);
   const [jobDescriptionState, setJobDescriptionState] = useState(
     EditorState.createEmpty()
   );
   const [aboutCompanyState, setAboutCompanyState] = useState(
     EditorState.createEmpty()
   );
+
+  const steps = getSteps();
 
   let UGC = CoursesList.filter((item, index) => {
     if (item.Course.charAt(0) === "B" || item.Course.charAt(0) === "b") {
@@ -92,18 +107,18 @@ const StepperForm = () => {
   PGC = PGC.map((item) => {
     return item.Course;
   });
-  console.log("PGC", PGC);
+  //console.log("PGC", PGC);
 
   const handleState = (e) => {
-    setStateVal(e.target.value);
+    setstate(e.target.value);
   };
 
   const handleCity = (e) => {
-    setCityVal(e.target.value);
+    setcity(e.target.value);
   };
 
-  const handleQualification = (e) => {
-    setQualificationVal(e.target.value);
+  const handlequalificationVal = (e) => {
+    setqualificationVal(e.target.value);
     console.log(e.target.value);
   };
   const handleCourse = (event) => {
@@ -128,7 +143,7 @@ const StepperForm = () => {
     const val = draftToHtml(
       convertToRaw(jobDescriptionState.getCurrentContent())
     );
-    setJobDescriptionVal(val);
+    setjobDescription(val);
     // console.log(
     //   draftToHtml(convertToRaw(jobDescriptionState.getCurrentContent()))
     // );
@@ -139,16 +154,63 @@ const StepperForm = () => {
     const val = draftToHtml(
       convertToRaw(aboutCompanyState.getCurrentContent())
     );
-    setAboutCompanyVal(val);
+    setaboutCompany(val);
     // console.log(
     //   draftToHtml(convertToRaw(aboutCompanyState.getCurrentContent()))
     // );
   };
 
-  const steps = getSteps();
-
-  const handleNext = () => {
+  const handleNext = async () => {
     setActiveStep(activeStep + 1);
+    if (activeStep == steps.length - 1) {
+      let jobLocation;
+      let salary;
+      let experience;
+      let qualification;
+      if (qualificationVal === "batchelors" || qualificationVal === "masters") {
+        qualification = courseVal;
+      }
+      if (permanentWFH) {
+        jobLocation = "WFH";
+      } else {
+        jobLocation = city + ", " + state;
+      }
+      if (fixedSalary) {
+        salary = fixedSalaryAmount;
+      } else {
+        salary = { min: MinimumSalaryAmount, max: maximumSalaryAmount };
+      }
+      if (experienceVal === "fresher") {
+        experience = "fresher";
+      } else {
+        experience = { min: minimumExperience, max: maximumExperience };
+      }
+      const formData = {
+        jobTitle,
+        noOfOpenings,
+        jobLocation,
+        qualification,
+        salary,
+        salaryPeriod,
+        jobDescription,
+        experience,
+        requiredSkills,
+        companyName,
+        aboutCompany,
+        source,
+        applyLink,
+      };
+      try {
+        const res = await axios.post(
+          `${process.env.REACT_APP_SERVER_URI}/api/job/add`,
+          formData
+        );
+        setIsPublished(true);
+        console.log("data sent:", formData);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   const handleBack = () => {
@@ -170,6 +232,7 @@ const StepperForm = () => {
                     variant="outlined"
                     size="small"
                     fullWidth
+                    onChange={(e) => setJobTitle(e.target.value)}
                     placeholder="ex: software development engineer"
                     name="jobTitle"
                     required
@@ -185,6 +248,7 @@ const StepperForm = () => {
                     variant="outlined"
                     size="small"
                     fullWidth
+                    onChange={(e) => setNoOfOpenings(e.target.value)}
                     placeholder="eg: 4"
                     name="openings"
                     required
@@ -217,6 +281,7 @@ const StepperForm = () => {
                       variant="outlined"
                       size="small"
                       fullWidth
+                      onChange={(e) => setFixedSalaryAmount(e.target.value)}
                       placeholder="ex: 500000"
                       name="fixedSalary"
                       required
@@ -231,6 +296,7 @@ const StepperForm = () => {
                         variant="outlined"
                         size="small"
                         fullWidth
+                        onChange={(e) => setMinimumSalaryAmount(e.target.value)}
                         placeholder="ex: 500000"
                         name="minSalary"
                         required
@@ -242,6 +308,7 @@ const StepperForm = () => {
                         variant="outlined"
                         size="small"
                         fullWidth
+                        onChange={(e) => setMaximumSalaryAmount(e.target.value)}
                         placeholder="ex: 700000"
                         name="maxSalary"
                         required
@@ -301,7 +368,7 @@ const StepperForm = () => {
                         className="location-state select-input"
                         labelId="State-label"
                         id="State"
-                        value={stateVal}
+                        value={state}
                         onChange={handleState}
                         label="State"
                         placeholder="Select a State"
@@ -327,14 +394,14 @@ const StepperForm = () => {
                         className="location-city select-input"
                         labelId="city-label"
                         id="location-city"
-                        value={cityVal}
+                        value={city}
                         onChange={handleCity}
                       >
                         <MenuItem value="" disabled={true}>
                           <em>Select a city</em>
                         </MenuItem>
-                        {stateVal ? (
-                          stateCityJson[stateVal].map((city, idx) => {
+                        {state ? (
+                          stateCityJson[state].map((city, idx) => {
                             return (
                               <MenuItem key={idx} value={city}>
                                 {city}
@@ -354,21 +421,21 @@ const StepperForm = () => {
               <div className="single-column-container">
                 <span className="multiple-input-container">
                   <FormControl variant="standard">
-                    <InputLabel id="qualification-label">
-                      Qualification
+                    <InputLabel id="qualificationVal-label">
+                      qualificationVal
                     </InputLabel>
                     <Select
-                      className="qualification select-input"
-                      labelId="qualification-label"
-                      id="qualification"
+                      className="qualificationVal select-input"
+                      labelId="qualificationVal-label"
+                      id="qualificationVal"
                       value={qualificationVal}
-                      onChange={handleQualification}
-                      label="qualification-label"
-                      placeholder="Select minimum Qualification"
+                      onChange={handlequalificationVal}
+                      label="qualificationVal-label"
+                      placeholder="Select minimum qualificationVal"
                       required
                     >
                       <MenuItem value="" disabled={true}>
-                        <em>Select minimum Qualification</em>
+                        <em>Select minimum qualificationVal</em>
                       </MenuItem>
                       <MenuItem value="10th">10th</MenuItem>
                       <MenuItem value="12th/diploma">12th/diploma</MenuItem>
@@ -400,7 +467,7 @@ const StepperForm = () => {
                           {qualificationVal === "batchelors" &&
                             UGC.map((course, index) => {
                               return (
-                                <MenuItem key={course} value={course}>
+                                <MenuItem key={index} value={course}>
                                   <Checkbox
                                     checked={courseVal.indexOf(course) > -1}
                                   />
@@ -431,6 +498,28 @@ const StepperForm = () => {
       case 1:
         return (
           <div className="form-content-columns-container">
+            <div className="full-width-column job-description">
+              <FormLabel id="work-experience">Job Description</FormLabel>
+              <div className="job-description-editor">
+                <Editor
+                  editorState={jobDescriptionState}
+                  wrapperClassName="wrapper-class-job"
+                  editorClassName="editor-class-job"
+                  toolbarClassName="toolbar-class-job"
+                  onEditorStateChange={jobDescriptionHandler}
+                  placeholder="Write about Job here......"
+                  required={true}
+                  toolbar={{
+                    options: ["inline", "list", "textAlign", "history", "link"],
+                    inline: { inDropdown: true },
+                    list: { inDropdown: true },
+                    textAlign: { inDropdown: true },
+                    link: { inDropdown: true },
+                    history: { inDropdown: true },
+                  }}
+                />
+              </div>
+            </div>
             <div className="form-content-columns">
               <div className="form-content-col1">
                 <div>
@@ -472,6 +561,9 @@ const StepperForm = () => {
                             variant="outlined"
                             size="small"
                             fullWidth
+                            onChange={(e) =>
+                              setMinimumExperience(e.target.value)
+                            }
                             placeholder="ex: 500000"
                             name="min-experience"
                             type="number"
@@ -490,6 +582,9 @@ const StepperForm = () => {
                             variant="outlined"
                             size="small"
                             fullWidth
+                            onChange={(e) =>
+                              setMaximumExperience(e.target.value)
+                            }
                             placeholder="ex: 700000"
                             name="max-experience"
                             type="number"
@@ -517,34 +612,13 @@ const StepperForm = () => {
                       variant="outlined"
                       size="small"
                       fullWidth
+                      onChange={(e) => setRequiredSkills(e.target.value)}
                       placeholder="ex: ms-word, telecalling, software developer"
                       name="max-experience"
                       required
                     />
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="full-width-column job-description">
-              <FormLabel id="work-experience">Job Description</FormLabel>
-              <div className="job-description-editor">
-                <Editor
-                  editorState={jobDescriptionState}
-                  wrapperClassName="wrapper-class-job"
-                  editorClassName="editor-class-job"
-                  toolbarClassName="toolbar-class-job"
-                  onEditorStateChange={jobDescriptionHandler}
-                  placeholder="Write about Job here......"
-                  required={true}
-                  toolbar={{
-                    options: ["inline", "list", "textAlign", "history", "link"],
-                    inline: { inDropdown: true },
-                    list: { inDropdown: true },
-                    textAlign: { inDropdown: true },
-                    link: { inDropdown: true },
-                    history: { inDropdown: true },
-                  }}
-                />
               </div>
             </div>
           </div>
@@ -561,6 +635,7 @@ const StepperForm = () => {
                 placeholder="company name"
                 margin="normal"
                 name="jobTitle"
+                onChange={(e) => setCompanyName(e.target.value)}
               />
               <div className="full-width-column">
                 <FormLabel id="about-company">About Company</FormLabel>
@@ -602,6 +677,7 @@ const StepperForm = () => {
               variant="outlined"
               placeholder="ex: careers.amazon.in"
               fullWidth
+              onChange={(e) => setSource(e.target.value)}
               margin="normal"
             />
             <TextField
@@ -609,6 +685,7 @@ const StepperForm = () => {
               variant="outlined"
               placeholder="ex: https://careers.amazon.in/software-developer"
               fullWidth
+              onChange={(e) => setApplyLink(e.target.value)}
               margin="normal"
             />
           </>

@@ -21,8 +21,6 @@
   margin: 0rem 2rem;
   height: 7rem;
 }
-.step-container {
-}
 .stepper-form-content-container {
   margin: var(--stepper-content-margin);
   height: auto;
@@ -66,10 +64,8 @@
   justify-content: center;
 }
 
-.toolbar-class-job {
-}
 .wrapper-class-job {
-  height: 30vh;
+  height: 15rem;
 }
 
 .form-content-columns {
@@ -179,6 +175,13 @@
 
   .experience {
     justify-content: left;
+    margin-top: 5rem;
+  }
+  .job-description {
+    margin-top: 2rem;
+  }
+  .min-max-experience {
+    margin-top: 2rem;
   }
 }
 @media only screen and (max-width: 657px) {
@@ -262,6 +265,17 @@
     align-items: center;
     margin: 0;
     width: 80vw;
+  }
+}
+
+@media only screen and (max-width: 390px) {
+  .experience {
+    margin-top: 5rem;
+  }
+}
+@media only screen and (max-width: 375px) {
+  .experience {
+    margin-top: 1rem;
   }
 }
 @media only screen and (max-width: 333px) {

@@ -423,7 +423,7 @@ const StepperForm = () => {
                 <span className="multiple-input-container">
                   <FormControl variant="standard">
                     <InputLabel id="qualificationVal-label">
-                      qualificationVal
+                      qualification
                     </InputLabel>
                     <Select
                       className="qualificationVal select-input"
@@ -432,11 +432,11 @@ const StepperForm = () => {
                       value={qualificationVal}
                       onChange={handlequalificationVal}
                       label="qualificationVal-label"
-                      placeholder="Select minimum qualificationVal"
+                      placeholder="Select minimum qualification"
                       required
                     >
                       <MenuItem value="" disabled={true}>
-                        <em>Select minimum qualificationVal</em>
+                        <em>Select minimum qualification</em>
                       </MenuItem>
                       <MenuItem value="10th">10th</MenuItem>
                       <MenuItem value="12th/diploma">12th/diploma</MenuItem>
@@ -527,9 +527,9 @@ const StepperForm = () => {
                   <div className="single-column-container">
                     <div className="single-input-container experience">
                       <FormControl>
-                        <FormLabel id="work-experience">
+                        {/* <FormLabel id="work-experience">
                           Work Experinece
-                        </FormLabel>
+                        </FormLabel> */}
                         <RadioGroup
                           row
                           aria-labelledby="work-experience"
@@ -551,7 +551,7 @@ const StepperForm = () => {
                       </FormControl>
                     </div>
                   </div>
-                  <div className="single-column-container">
+                  <div className="single-column-container min-max-experience">
                     <span className="multiple-input-container">
                       {experienceVal === "experienced" && (
                         <>
@@ -673,22 +673,26 @@ const StepperForm = () => {
       case 3:
         return (
           <>
-            <TextField
-              label="Source"
-              variant="outlined"
-              placeholder="ex: careers.amazon.in"
-              fullWidth
-              onChange={(e) => setSource(e.target.value)}
-              margin="normal"
-            />
-            <TextField
-              label="Apply Link"
-              variant="outlined"
-              placeholder="ex: https://careers.amazon.in/software-developer"
-              fullWidth
-              onChange={(e) => setApplyLink(e.target.value)}
-              margin="normal"
-            />
+            <div className="form-content-columns-container">
+              <div className="full-width-column job-description">
+                <TextField
+                  label="Source"
+                  variant="outlined"
+                  placeholder="ex: careers.amazon.in"
+                  fullWidth
+                  onChange={(e) => setSource(e.target.value)}
+                  margin="normal"
+                />
+                <TextField
+                  label="Apply Link"
+                  variant="outlined"
+                  placeholder="ex: https://careers.amazon.in/software-developer"
+                  fullWidth
+                  onChange={(e) => setApplyLink(e.target.value)}
+                  margin="normal"
+                />
+              </div>
+            </div>
           </>
         );
       default:

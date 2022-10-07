@@ -4,7 +4,7 @@ exports.add = async (req, res) => {
   const maxJobIdUser = await Job.find().sort({ jobId: -1 }).limit(1);
   //console.log("max id: ", maxJobIdUser);
   let jobId;
-  const {
+  let {
     jobTitle,
     noOfOpenings,
     jobLocation,
@@ -36,12 +36,16 @@ exports.add = async (req, res) => {
   } else {
     jobId = 1;
   }
+  jobLocation = jobLocation.split(",");
+  city = jobLocation[0];
+  state = jobLocation[1];
   // console.log("max job id is:" + jobId);
   const newJob = new Job({
     jobId,
     jobTitle,
     noOfOpenings,
-    jobLocation,
+    city,
+    state,
     qualification,
     salary,
     salaryPeriod,

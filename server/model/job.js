@@ -13,7 +13,11 @@ const jobSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
-  jobLocation: {
+  city: {
+    type: String,
+    required: true,
+  },
+  state: {
     type: String,
     required: true,
   },

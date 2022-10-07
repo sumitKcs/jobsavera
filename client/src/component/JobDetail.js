@@ -8,6 +8,7 @@ import { HiCurrencyRupee } from "react-icons/hi";
 import { MdOutlineWork } from "react-icons/md";
 import { FaUserGraduate } from "react-icons/fa";
 import { AiOutlineBackward } from "react-icons/ai";
+import { BsFillPersonPlusFill } from "react-icons/bs";
 import TopBar from "./TopBar";
 import NoticeBar from "./NoticeBar";
 import Search from "./Search";
@@ -46,28 +47,33 @@ const JobDetail = () => {
   }, []);
 
   console.log("single job data: ", singlejobDetails.location);
-  const {
+  let {
     jobId,
     jobTitle,
-    companyName,
-    qualification,
-    experience,
-    state,
+    noOfOpenings,
     city,
+    state,
+    qualification,
     salary,
-    skills,
-    description,
+    salaryPeriod,
+    jobDescription,
+    experience,
+    requiredSkills,
+    companyName,
     aboutCompany,
-    postedOn,
     source,
     applyLink,
+    postedOn,
   } = singlejobDetails;
 
+  if (salaryPeriod === "monthly") salaryPeriod = "p.m.";
+  else salaryPeriod = "p.a.";
   const date = new Date(postedOn);
   const day = date.getDate();
   const month = date.getMonth();
   const year = date.getFullYear();
   const postedDate = `${day}/${month + 1}/${year}`;
+
   return (
     <>
       <Navbar />
@@ -99,7 +105,7 @@ const JobDetail = () => {
                   <div className="jobDetails-icon-description-leftBox">
                     <div className="jobDetail-location jobContents">
                       <ImLocation2 className="jobDetail-icons" /> &nbsp;
-                      {city === "N/A" ? state : `${city} (${state})`}
+                      {city + "," + state}
                     </div>
                     <div className="jobDetail-qualification jobContents">
                       <FaUserGraduate className="jobDetail-icons" />
@@ -113,7 +119,11 @@ const JobDetail = () => {
                   <div className="jobDetails-icon-description-rightBox">
                     <div className="jobDetail-salary jobContents">
                       <HiCurrencyRupee className="jobDetail-icons" />
-                      &nbsp; {salary}
+                      &nbsp; {salary + " " + salaryPeriod}
+                    </div>
+                    <div className="jobDetail-postedOn jobContents">
+                      <BsFillPersonPlusFill className="jobDetail-icons" />{" "}
+                      &nbsp; Total Openings: {noOfOpenings}
                     </div>
                     <div className="jobDetail-postedOn jobContents">
                       <MdOutlineAccessTimeFilled className="jobDetail-icons" />{" "}
@@ -125,13 +135,13 @@ const JobDetail = () => {
                   <div className="jobDetail-heading ">Required Skills</div>
                   <hr className="horizontal-line"></hr>
                   <div className="jobDetail-skills text-description">
-                    {skills}
+                    {requiredSkills}
                   </div>
                   <div className="jobDetail-heading ">Job Description</div>
                   <hr className="horizontal-line"></hr>
                   <div
                     className="jobDetail-description text-description"
-                    dangerouslySetInnerHTML={{ __html: description }}
+                    dangerouslySetInnerHTML={{ __html: jobDescription }}
                   ></div>
                   <div className="jobDetail-heading">About Company</div>
                   <hr className="horizontal-line"></hr>

@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
+import * as htmlToImage from "html-to-image";
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
+import downloadjs from "downloadjs";
+import domtoimage from "dom-to-image";
+import { saveAs } from "file-saver";
 import {
   Stepper,
   Step,
@@ -32,6 +37,10 @@ import stateCityJson from "../helper/stateCityList";
 import { SkillsList } from "../helper/SkillsList";
 import { CoursesList } from "../helper/CoursesList";
 import axios from "axios";
+import image from "../assets/insta-post.png";
+import { FaUserGraduate } from "react-icons/fa";
+import { MdOutlineWork } from "react-icons/md";
+import { ImLocation2 } from "react-icons/im";
 
 const getSteps = () => {
   return [
@@ -629,8 +638,8 @@ const StepperForm = () => {
           <div className="form-content-columns-container">
             <div className="about-company-container">
               <TextField
-                className="company-name"
-                id="company-name"
+                className="company-name-input"
+                id="company-name-input"
                 label="company name"
                 variant="outlined"
                 placeholder="company name"
@@ -709,62 +718,121 @@ const StepperForm = () => {
       delete stepperProps.alternativeLabel;
     }
   }
-
+  let previewLocation = city + "," + state;
+  const downloadHandler = () => {
+    const node = document.getElementById("preview-box-content");
+    domtoimage
+      .toBlob(document.getElementById("preview-box-content"))
+      .then(function (blob) {
+        saveAs(blob, "myImage.png");
+      });
+  };
+  let previewQualification;
+  if (qualificationVal === "batchelors" || qualificationVal === "masters") {
+    if (courseVal.length > 0) previewQualification = courseVal.toString();
+    else if (qualificationVal === "batchelors")
+      previewQualification = "ALL GRADUATES";
+    else previewQualification = "ALL POST-GRADUATES";
+  } else previewQualification = qualificationVal;
   return (
     <>
-      <Navbar />
-
-      <div className="stepperform-container">
-        {activeStep === steps.length ? (
-          <Typography variant="h3" align="center">
-            Thank You
-          </Typography>
-        ) : (
-          <>
-            <Stepper
-              alternativeLabel
-              activeStep={activeStep}
-              className="stepper"
-            >
-              {steps.map((step, index) => {
-                return (
-                  <Step key={index} className="step-container">
-                    <StepLabel className="step-label">{step}</StepLabel>
-                  </Step>
-                );
-              })}
-            </Stepper>
-            <div className="stepper-form-content-container">
-              <div className="stepper-form-content">
-                <form>{getStepsContent(activeStep)}</form>
+      <div className="stepperform-preview-box">
+        <div className="stepperform-container">
+          {activeStep === steps.length ? (
+            <Typography variant="h3" align="center">
+              Thank You
+            </Typography>
+          ) : (
+            <>
+              <Stepper
+                alternativeLabel
+                activeStep={activeStep}
+                className="stepper"
+              >
+                {steps.map((step, index) => {
+                  return (
+                    <Step key={index} className="step-container">
+                      <StepLabel className="step-label">{step}</StepLabel>
+                    </Step>
+                  );
+                })}
+              </Stepper>
+              <div className="stepper-form-content-container">
+                <div className="stepper-form-content">
+                  <form>{getStepsContent(activeStep)}</form>
+                </div>
+                <div className="stepper-form-buttons-container">
+                  <div className="stepper-form-button">
+                    <Button
+                      className="button"
+                      variant="contained"
+                      color="primary"
+                      disabled={activeStep === 0}
+                      onClick={handleBack}
+                    >
+                      back
+                    </Button>
+                  </div>
+                  <div className="stepper-form-button">
+                    <Button
+                      className="button"
+                      variant="contained"
+                      color="primary"
+                      onClick={handleNext}
+                    >
+                      {" "}
+                      {activeStep === steps.length - 1 ? "finish" : "next"}
+                    </Button>
+                  </div>
+                </div>
               </div>
-              <div className="stepper-form-buttons-container">
-                <div className="stepper-form-button">
-                  <Button
-                    className="button"
-                    variant="contained"
-                    color="primary"
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                  >
-                    back
-                  </Button>
-                </div>
-                <div className="stepper-form-button">
-                  <Button
-                    className="button"
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                  >
-                    {" "}
-                    {activeStep === steps.length - 1 ? "finish" : "next"}
-                  </Button>
-                </div>
+            </>
+          )}
+        </div>
+        <div className="preview-box-container">
+          <div className="preview-box-content" id="preview-box-content">
+            <img
+              style={{ width: "100%", height: "100%" }}
+              src={image}
+              className="job-preview-image"
+              alt="job-preview-post"
+            />
+            <div className="preview-company-name">
+              {companyName ? companyName.toUpperCase() : "COMPANY NAME HERE"}
+            </div>
+            <div className="preview-role">
+              {jobTitle ? jobTitle.toUpperCase() : "DESIGNATION HERE"}
+            </div>
+            <div className="preview-details">
+              <div className="preview-qualification">
+                <FaUserGraduate style={{ color: "#2497FD" }} /> &nbsp;
+                {previewQualification
+                  ? previewQualification
+                  : "MINIMUM QUALIFICATION"}
+              </div>
+              <div className="preview-experience">
+                <MdOutlineWork style={{ color: "#2497FD" }} /> &nbsp;
+                {experienceVal
+                  ? experienceVal === "fresher"
+                    ? "FRESHER"
+                    : minimumExperience + "-" + maximumExperience
+                  : "EXPERIENCE"}
+              </div>
+              <div className="preview-location">
+                <ImLocation2 style={{ color: "#2497FD" }} /> &nbsp;
+                {state && city ? previewLocation : "LOCATION"}
               </div>
             </div>
-          </>
-        )}
+          </div>
+          <Button
+            className="preview-download-button"
+            variant="contained"
+            color="primary"
+            onClick={() => downloadHandler()}
+          >
+            download
+          </Button>
+        </div>
       </div>
     </>
   );

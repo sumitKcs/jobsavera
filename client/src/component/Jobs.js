@@ -38,6 +38,23 @@ const Jobs = () => {
             const year = date.getFullYear();
             const postedDate = `${day}/${month + 1}/${year}`;
             console.log("extracted year: ", year);
+            let jobTitle = jobObj.jobTitle;
+            jobTitle = jobTitle.charAt(0).toUpperCase() + jobTitle.slice(1);
+            let companyName = jobObj.companyName;
+            companyName =
+              companyName.charAt(0).toUpperCase() + companyName.slice(1);
+            let qualification = jobObj.qualification;
+            qualification = qualification.split(",");
+            if (qualification.length > 2) {
+              qualification =
+                qualification[0] +
+                "," +
+                qualification[1] +
+                "," +
+                qualification[2] +
+                "...";
+            }
+
             return (
               <div
                 className="job-card"
@@ -56,8 +73,8 @@ const Jobs = () => {
                 </div> */}
 
                 <div className="job-summary">
-                  <div className="job-title"> {jobObj.jobTitle} </div>
-                  <div className="company-name"> @{jobObj.companyName} </div>
+                  <div className="job-title"> {jobTitle} </div>
+                  <div className="company-name"> @{companyName} </div>
                   <div className="horizontal-line-container">
                     <hr className="horizontal-line"></hr>{" "}
                   </div>
@@ -69,17 +86,17 @@ const Jobs = () => {
                       </div>
                       <div className="experience">
                         <FaUserGraduate style={{ color: "green" }} /> &nbsp;
-                        {jobObj.qualification}
+                        {qualification}
                       </div>
                       <div className="experience">
                         <MdOutlineWork style={{ color: "green" }} /> &nbsp;
-                        {jobObj.experience}
+                        {jobObj.experience} years
                       </div>
                     </div>
                     <div className="job-summary-right">
                       <div className="location">
                         <ImLocation2 style={{ color: "green" }} /> &nbsp;
-                        {jobObj.city === "N/A" ? jobObj.state : jobObj.city}
+                        {jobObj.city + "," + jobObj.state}
                       </div>
                       <div className="posted-on">
                         <MdOutlineAccessTimeFilled style={{ color: "green" }} />{" "}

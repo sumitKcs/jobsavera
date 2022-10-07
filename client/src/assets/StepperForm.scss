@@ -1,9 +1,71 @@
+.stepperform-preview-box {
+  width: 98vw;
+  height: 50rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.preview-box-container {
+  align-self: flex-start;
+  min-width: 30rem;
+  min-height: 40rem;
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-top: 5rem;
+}
+.preview-box-content {
+  position: relative;
+  height: 31rem;
+  width: 31rem;
+}
+.job-preview-image {
+}
+.preview-company-name {
+  color: white;
+  font-size: xx-large;
+  font-weight: bolder;
+  position: absolute;
+  bottom: 18.5rem;
+  left: 3rem;
+  min-width: 26rem;
+}
+.preview-role {
+  color: white;
+  font-size: larger;
+  font-weight: 600;
+  position: absolute;
+  bottom: 14.5rem;
+  left: 3rem;
+  min-width: 26rem;
+}
+.preview-qualification,
+.preview-experience,
+.preview-location {
+  min-width: 26rem;
+}
+.preview-details {
+  color: white;
+  font-size: larger;
+  font-weight: 600;
+  position: absolute;
+  bottom: 7.5rem;
+  left: 3rem;
+}
+.preview-download-button {
+  align-self: center;
+  position: relative;
+  padding: 5rem;
+}
 .stepperForm {
   height: auto;
   width: 100vw;
   margin-bottom: 5rem;
+  margin-left: 1rem;
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: left;
 
   --stepper-content-margin: 2rem 2rem 2rem 2rem;
   --column-width: 25vw;
@@ -51,7 +113,7 @@
   margin-top: -2rem;
   margin-bottom: 1.5rem;
 }
-.company-name {
+.company-name-input {
   width: 90%;
   align-self: center;
 }
@@ -148,6 +210,30 @@
 
 // media queries
 @media only screen and (max-width: 864px) {
+  .stepperform-preview-box {
+    width: 100vw;
+    height: 50rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-x: scroll;
+  }
+  .preview-box-container {
+    border: 2px solid blue;
+    align-self: flex-start;
+    min-width: 30rem;
+    min-height: 40rem;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-top: 0rem;
+    overflow-x: scroll;
+  }
+  .preview-box-content {
+    height: 31rem;
+    width: 31rem;
+    overflow-x: scroll;
+  }
+
   .stepper-form-content {
     height: auto;
     margin: var(--stepper-content-margin);
